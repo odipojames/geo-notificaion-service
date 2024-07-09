@@ -92,15 +92,20 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_URL = '/static/'
+SASE_DIR = Path(__file__).resolve().parent.parent
 
-# Remove or comment out STATICFILES_DIRS if not using
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATICFILES_DIRS =[BASE_DIR / 'notifications/static',]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-
+SITE_ID = 1
 # Add this for whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # SWAGGER_SETTINGS to ensure proper display of the UI
 SWAGGER_SETTINGS = {
