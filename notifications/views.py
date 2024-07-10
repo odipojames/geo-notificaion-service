@@ -13,6 +13,7 @@ class NotificationCreateView(generics.ListCreateAPIView):
         user = self.request.user
         role = user.role
         email = user.email
+        print("email",email)
 
         # Base queryset for all roles: notifications with type 'disbursement_date'
         disbursement_notifications = Notification.objects.filter(type="disbursement_date")
@@ -23,13 +24,13 @@ class NotificationCreateView(generics.ListCreateAPIView):
 
         # Notifications for own approved or rejected advances
         own_approved_or_rejected_advances = Notification.objects.filter(
-            type="advance_request",
+            type="advance",
             payload__employee__email=email
         ).filter(Q(payload__is_approved=True) | Q(payload__is_rejected=True))
-
+        
         # Notifications for unprocessed advances that are not own
         unprocessed_advances = Notification.objects.filter(
-            type="advance_request",
+            type="advance",
             payload__is_approved=False,
             payload__is_rejected=False,
             payload__is_cancelled=False
