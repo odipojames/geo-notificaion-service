@@ -13,8 +13,7 @@ class NotificationCreateView(generics.ListCreateAPIView):
         user = self.request.user
         role = user.role
         email = user.email
-        print("email",email)
-
+        
         # Base queryset for all roles: notifications with type 'disbursement_date'
         disbursement_notifications = Notification.objects.filter(type="disbursement_date")
 
